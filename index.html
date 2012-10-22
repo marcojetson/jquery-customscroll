@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+		<title>jquery-customscroll</title>
+		<link rel="stylesheet" href="stylesheets/styles.css">
+		<link rel="stylesheet" href="stylesheets/demo.css">
+		<link rel="stylesheet" href="stylesheets/pygment_trac.css">
+		<link rel="stylesheet" href="customscroll.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="wrapper">
+			<header>
+				<h1>jquery-customscroll</h1>
+				<p>Facebook like custom scrollbars (OSX inspired).</p>
+				<p class="view">
+					<a href="https://github.com/marcojetson/jquery-customscroll">View the Project on GitHub <small>marcojetson/jquery-customscroll</small></a>
+				</p>
+				<ul>
+					<li><a href="https://github.com/marcojetson/jquery-customscroll/zipball/master">Download <strong>ZIP File</strong></a></li>
+					<li><a href="https://github.com/marcojetson/jquery-customscroll/tarball/master">Download <strong>TAR Ball</strong></a></li>
+					<li><a href="https://github.com/marcojetson/jquery-customscroll">View On <strong>GitHub</strong></a></li>
+				</ul>
+			</header>
+			<section>
+				<h2>Demos</h2>
+				<ul class="demos">
+					<li>
+						<h3>Default</h3>
+						<div></div>
+						<pre style="display:none"><code>{}</code></pre>
+					</li>
+					<li>
+						<h3>Show on mouseenter hide on mouseleave, no effects</h3>
+						<div></div>
+						<pre><code>{
+	show: {
+		on: 'mouseenter',
+		effect: 'show',
+		speed: 0
+	},
+	hide: {
+		on: 'mouseleave',
+		effect: 'hide',
+		speed: 0,
+		delay: 0
+	}
+}</code></pre>
+					</li>
+					<li>
+						<h3>Fat and slow grow</h3>
+						<div></div>
+						<pre><code>{
+	grow: {
+		size: 12,
+		speed: 2000
+	}
+}</code></pre>
+					</li>
+				</ul>
+				<h2>Installation</h2>
+				<p>Include script after jQuery</p>
+				<pre><code>&lt;script src="jquery.customscroll.js"&gt;&lt;/script&gt;</code></pre>
+				<p>Include stylesheet</p>
+				<pre><code>&lt;link rel="stylesheet" href="customscroll.css"&gt;</code></pre>
+				<h2>Usage</h2>
+				<pre><code>$(selector).customscroll(options)</code></pre>
+				<p>Selected element must have height defined in CSS rules (and overflow-y: hidden to avoid screen flashes)</p>
+				<h2>Options</h2>
+				<h3>show</h3>
+				<h4>on</h4>
+				<p>Event when track is shown, default 'mouseenter scrollstart'</p>
+				<h4>effect</h4>
+				<p>Effect used to show track, default 'fadeIn'</p>
+				<h4>speed</h4>
+				<p>Effect speed to show track, default 250</p>
+				<h4>delay</h4>
+				<p>Show delay, default 0</p>
+				<h3>hide</h3>
+				<h4>on</h4>
+				<p>Event when track is hidden, default 'mouseleave scrollstop'</p>
+				<h4>effect</h4>
+				<p>Effect used to hide track, default 'fadeOut'</p>
+				<h4>speed</h4>
+				<p>Effect speed to hide track, default 250</p>
+				<h4>delay</h4>
+				<p>Hide delay, default 750</p>
+				<h3>grow</h3>
+				<p>Change size on hover, use null for disable</p>
+				<h4>size</h4>
+				<p>Size to grow in pixels, default 3</p>
+				<h4>speed</h4>
+				<p>Grow animation speed, default 100</p>
+				<h3>pageUpnDown</h3>
+				<h4>speed</h4>
+				<p>Speed animation when clicking on the track</p>
+				<p>Fade in effect duration in milliseconds, default 400</p>
+			</section>
+			<footer>
+				<p>This project is maintained by <a href="https://github.com/marcojetson">marcojetson</a> and dual licensed under the <a href="http://www.opensource.org/licenses/mit-license.php">MIT</a> or <a href="http://www.gnu.org/licenses/gpl-2.0.html">GPL Version 2</a> licenses.</p>
+				<p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+			</footer>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script src="jquery.customscroll.js"></script>
+		<script src="javascripts/demo.js"></script>
+		<script src="javascripts/scale.fix.js"></script>
+	</body>
+</html>
