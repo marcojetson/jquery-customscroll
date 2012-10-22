@@ -15,11 +15,9 @@ body.dragging {
 }
 .customscroll > .placeholder {
 	background-color: transparent;
-	bottom: 2px;
 	display: block;
 	position: absolute;
 	right: 2px;
-	top: 2px;
 	width: 12px;
 }
 .customscroll > .placeholder > .track {

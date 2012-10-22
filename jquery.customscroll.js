@@ -5,7 +5,7 @@
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl-2.0.html
  */
-;(function($, window) {
+;(function($) {
 
 	$.customscrollOptions = {
 		show: {
@@ -38,11 +38,11 @@
 			object.addClass('customscroll');
 			object.html([
 				'<div class="wrapper" style="height:' + object.height() + 'px">',
-					'<div class="content">',
+					'<div class="content" style="width:' + object.width() + 'px">',
 						object.html(),
 					'</div>',
 				'</div>',
-				'<div class="placeholder">',
+				'<div class="placeholder" style="top:' + object.css('paddingTop') + ';bottom:' + object.css('paddingBottom') + '">',
 					'<div class="track">',
 						'<div class="grip"></div>',
 					'</div>',
@@ -80,7 +80,6 @@
 						callback();
 					}, 250);
 				}
-				console.log('a', wrapper.hasClass('keep'))
 				// hide
 				clearInterval(showHideTimer);
 				showHideTimer = setTimeout(function() {
@@ -92,9 +91,10 @@
 			var scrollingTimer;
 			wrapper.on('scroll', function(event) {
 				var height = object.height();
+				console.log(parseInt(object.css('paddingTop')) + parseInt(object.css('paddingBottom')))
 				grip.css({
 					// grip height is view height / scroll height * 200 (4 is for margins)
-					height: height / this.scrollHeight * 200 - 4,
+					height: height / this.scrollHeight * 200 - parseInt(object.css('paddingTop')) - parseInt(object.css('paddingBottom')),
 					// scroll position
 					marginTop: this.scrollTop * 100 / this.scrollHeight * height / 100 + 'px'
 				});
@@ -112,13 +112,11 @@
 			// placeholder and track hover
 			placeholder.on('mouseenter', function() {
 				// do not hide track and show
-				console.log('enter')
 				wrapper.addClass('keep');
 				show();
 			});
 			placeholder.on('mouseleave', function() {
 				// hide track
-				console.log('left')
 				wrapper.removeClass('keep');
 			});
 			track.on('mouseenter', function() {
@@ -158,36 +156,31 @@
 			});
 
 			// grip drag
-			var dragging;
+			var dragging = false;
 			grip.on('mousedown', function(event) {
 				// do not hide
 				wrapper.addClass('keep');
 				// mark as dragging
-				dragging = wrapper;
+				dragging = true;
 				// prevent text selection
 				$('body').addClass('dragging');
 			});
-			if (!window.customscroll) {
-				// do not bind more than once
-				$(document).on('mousemove', function(event) {
-					if (dragging) {
-						// we have drag, move
-						dragging.scrollTop(wrapper[0].scrollHeight * (event.pageY - track.offset().top - grip.height() / 2) / object.height());
-						event.preventDefault();
-					}
-				});
-				$(document).on('mouseup', function() {
-					if (dragging) {
-						// we have drag, remove
-						dragging.removeClass('keep');
-						dragging = null;
-						$('body').removeClass('dragging');
-					}
-				});
-				// mark so i dont bind events to document twice
-				window.customscroll = true;
-			}
+			$(document).on('mousemove', function(event) {
+				if (dragging) {
+					// we have drag, move
+					wrapper.scrollTop(wrapper[0].scrollHeight * (event.pageY - track.offset().top - grip.height() / 2) / object.height());
+					event.preventDefault();
+				}
+			});
+			$(document).on('mouseup', function() {
+				if (dragging) {
+					// we have drag, remove
+					wrapper.removeClass('keep');
+					dragging = false;
+					$('body').removeClass('dragging');
+				}
+			});
 
 		});
 	};
-})(jQuery, window);
+})(jQuery);
