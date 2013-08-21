@@ -119,6 +119,17 @@
 			});
 
 			// placeholder and track hover
+			wrapper.on('mouseenter', function() {
+				// do not hide track and show
+				wrapper.addClass('keep');
+				show();
+			});
+
+			// placeholder and track hover
+			wrapper.on('mouseleave', function() {
+				// do not hide track and show
+				wrapper.removeClass('keep');
+			});
 			placeholder.on('mouseenter', function() {
 				// do not hide track and show
 				wrapper.addClass('keep');
