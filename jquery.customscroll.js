@@ -100,7 +100,6 @@
 			var scrollingTimer;
 			wrapper.on('scroll', function(event) {
 				var height = object.height();
-				console.log(parseInt(object.css('paddingTop')) + parseInt(object.css('paddingBottom')))
 				grip.css({
 					// grip height is view height / scroll height * 200 (4 is for margins)
 					height: height / this.scrollHeight * 200 - parseInt(object.css('paddingTop')) - parseInt(object.css('paddingBottom')),
