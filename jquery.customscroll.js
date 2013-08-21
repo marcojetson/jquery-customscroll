@@ -8,6 +8,7 @@
 ;(function($) {
 
 	$.customscrollOptions = {
+		always: false,
 		show: {
 			on: 'mouseenter scrollstart',
 			effect: 'fadeIn',
@@ -62,6 +63,10 @@
 					// we dont need scroll
 					return;
 				}
+				if (wrapper[0].scrollHeight < parseInt(object.css('max-height'))) {
+					// this is a fix for IE
+					return;
+				}
 				// show
 				clearInterval(showHideTimer);
 				showHideTimer = setTimeout(function() {
@@ -74,6 +79,10 @@
 			};
 			wrapper.on(options.show.on, show);
 			wrapper.on(options.hide.on, function callback() {
+				// don't hide if always is true
+				if (options.always) {
+					return;
+				}
 				if (wrapper.hasClass('keep')) {
 					// someone says do not hide, try again later
 					return setTimeout(function() {
@@ -91,10 +100,9 @@
 			var scrollingTimer;
 			wrapper.on('scroll', function(event) {
 				var height = object.height();
-				console.log(parseInt(object.css('paddingTop')) + parseInt(object.css('paddingBottom')))
 				grip.css({
 					// grip height is view height / scroll height * 200 (4 is for margins)
-					height: height / this.scrollHeight * 200 - parseInt(object.css('paddingTop')) - parseInt(object.css('paddingBottom')),
+					height: height / this.scrollHeight * height - parseInt(object.css('paddingTop')) - parseInt(object.css('paddingBottom')),
 					// scroll position
 					marginTop: this.scrollTop * 100 / this.scrollHeight * height / 100 + 'px'
 				});
@@ -110,6 +118,17 @@
 			});
 
 			// placeholder and track hover
+			wrapper.on('mouseenter', function() {
+				// do not hide track and show
+				wrapper.addClass('keep');
+				show();
+			});
+
+			// placeholder and track hover
+			wrapper.on('mouseleave', function() {
+				// do not hide track and show
+				wrapper.removeClass('keep');
+			});
 			placeholder.on('mouseenter', function() {
 				// do not hide track and show
 				wrapper.addClass('keep');
@@ -155,6 +174,10 @@
 				}, options.pageUpnDown.speed);
 			});
 
+			// show initially if always is true
+			if (options.always) {
+				show();
+			}
 			// grip drag
 			var dragging = false;
 			grip.on('mousedown', function(event) {
