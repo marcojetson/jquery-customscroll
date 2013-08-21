@@ -102,7 +102,6 @@
 				var height = object.height();
 				grip.css({
 					// grip height is view height / scroll height * 200 (4 is for margins)
-					height: height / this.scrollHeight * 200 - parseInt(object.css('paddingTop')) - parseInt(object.css('paddingBottom')),
 					height: height / this.scrollHeight * height - parseInt(object.css('paddingTop')) - parseInt(object.css('paddingBottom')),
 					// scroll position
 					marginTop: this.scrollTop * 100 / this.scrollHeight * height / 100 + 'px'
