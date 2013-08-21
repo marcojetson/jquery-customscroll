@@ -8,6 +8,7 @@
 ;(function($) {
 
 	$.customscrollOptions = {
+		always: false,
 		show: {
 			on: 'mouseenter scrollstart',
 			effect: 'fadeIn',
@@ -78,6 +79,10 @@
 			};
 			wrapper.on(options.show.on, show);
 			wrapper.on(options.hide.on, function callback() {
+				// don't hide if always is true
+				if (options.always) {
+					return;
+				}
 				if (wrapper.hasClass('keep')) {
 					// someone says do not hide, try again later
 					return setTimeout(function() {
@@ -159,6 +164,10 @@
 				}, options.pageUpnDown.speed);
 			});
 
+			// show initially if always is true
+			if (options.always) {
+				show();
+			}
 			// grip drag
 			var dragging = false;
 			grip.on('mousedown', function(event) {
