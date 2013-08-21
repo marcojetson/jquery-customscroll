@@ -62,6 +62,10 @@
 					// we dont need scroll
 					return;
 				}
+				if (wrapper[0].scrollHeight < parseInt(object.css('max-height'))) {
+					// this is a fix for IE
+					return;
+				}
 				// show
 				clearInterval(showHideTimer);
 				showHideTimer = setTimeout(function() {
